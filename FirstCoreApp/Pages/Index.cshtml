@@ -3,71 +3,32 @@
 @{
     ViewData["Title"] = "Home";
 }
-@{
-    App riceCalculator = new App("rice", "Rice Calculator", "#B23A48");
-    App weight = new App("weight", "Weight Calculator", "#62466B");
-    App colour = new App("colour", "Colour Picker", "#011936");
-    App youTube = new App("youtube", "YouTube", "#667761");
-    App netflix = new App("netflix", "Netflix", "#F09D51");
-    List<App> appList = new List<App> { riceCalculator, weight, colour, youTube, netflix };
-
-}
-
-<div class="banner">
-    <div class="bannerContent">
-        <p class="bannerText">
-            @Model.Greeting, @Model.Name <br> It is @Model.Time
-        </p>
-    </div>
-</div>
 
 <div class="appsContainer" id="appsContainer">
-    @foreach(App app in appList)
+    @foreach(App app in Model.Apps)
     {
-    <div class="appBox" style="background-color: @app.Colour">
+        <div class="appBox container text-nowrap" id="app(@app.AppId)" style="background-color: @app.Colour">
         <div class="appContent">
-            <h4>
-                <a id="@app.AppId" href="#" onclick="displayApp(@app.AppId)">@app.AppName</a>
-            </h4>
-                @if (app.AppName == "YouTube" || app.AppName == "Netflix")
-                {
-                    <a href="@app.Url" target="_blank">Click Here</a>
-                }
+
+         @if (app.AppName == "YouTube" || app.AppName == "Netflix")
+         {
+          <a class="btn-dash btn btn-primary btn-lg" href="@app.Url" target="_blank">@app.AppName</a>
+         }else if(app.AppName == "Diary")
+         {
+          <a asp-page="/Diary" asp-rout-app="@app.AppName" class="btn-dash btn btn-primary btn-lg">@app.AppName</a>
+
+         }
+         
+         else
+         {
+           <script type="text/javascript" src="~/js/site.js"></script>
+            <button class="btn btn-dash btn-primary btn-lg text-nowrap" id="@app.AppId" onclick="displayApp(this.id)">@app.AppName</button>
+          }
         </div>
     </div>    
     }
 </div>
 
-<div class="riceAppContainer" id="riceAppContainer">
-    <div class="appTextContent">
-        <a href="#">x</a>
-        <h4>Convert uncooked rice to cooked!</h4>
-            <label for="uncooked">Uncooked Rice in grams:</label><br>
-            <input type="number" id="uncookedVal" name="uncookedVal" value="">
-            <input type="button" value="Submit" onclick="submitRequest(uncookedVal.value)">
-        <p display="none" id="conversion"></p>
-    </div>
 
-    <script>
-        function submitRequest(form) {
-            const inputValue = form;
-            let conversion = inputValue * 3;
-            let conversionResult = `Uncooked Rice amount = ${inputValue}g - Cooked conversion = ${conversion}g`;
-            document.getElementById("conversion").innerText = conversionResult;
-            document.getElementById("conversion").style.display = "inherit";
-        }
-    </script>
-</div>
 
-<script>
-    function displayApp(id)
-    {
-        const appIdToString = id;
-        console.log(appIdToString.includes("rice"));
-        console.log(appIdToString);
-        if (appIdToString.includes("rice")) {
-            document.getElementById("appsContainer").style.display = "none";
-            document.getElementById("riceAppContainer").style.display = "inherit";
-        }
-    }
-</script>
+

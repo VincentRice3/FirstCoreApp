@@ -36,7 +36,7 @@ a{
     flex-direction: column;
     align-items: center;
     text-align:center;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .appsContainer{
@@ -47,10 +47,11 @@ a{
     color: #FFFFFF;
     flex-wrap: wrap;
     margin-bottom: 100px;
+    text-align:center;
 }
 
 .appBox{
-    padding: 150px;
+    padding: 180px;
     margin: 10px;
     width: 100px;
     height: 100px;
@@ -62,4 +63,16 @@ a{
 
 .riceAppContainer {
     display: none;
+}
+
+.form{
+    display:flex;
+    flex-direction:row;
+    margin: 10px;
+
+}
+
+.btn-dash {
+    font-size: 2rem;
+    font-weight: bolder;
 }

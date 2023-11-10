@@ -11,13 +11,27 @@
         {
             AppId = id;
             AppName = appName;
+
             Url = GetUrl(AppName);
             Colour = colour;
         }
 
-        private static string GetUrl(string app)
+        private static string GetUrl(string appName)
         {
-            string url = $"https://{app}.com";
+            string url;
+
+            switch (appName)
+            {
+                case "Netflix":
+                    url = "https://www.netflix.com/browse";
+                    break;
+                case "Youtube":
+                    url = "https://www.youtube.com/";
+                    break;
+                default:
+                    url = $"https://{appName}.com";
+                    break;
+            }
             return url ;    
         }
 
